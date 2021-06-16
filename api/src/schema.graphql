@@ -1,0 +1,19 @@
+scalar Point
+scalar DateTime
+scalar PointInput
+
+type Experiment {
+  id: ID!
+  name: String!
+  description: String
+  variables: [Component] @relationship(type: "USES", direction: OUT)
+  constants: [Component] @relationship(type: "USES", direction: OUT)
+}
+
+type Component {
+  id: ID!
+  name: String!
+  description: String
+  variables: [Experiment] @relationship(type: "USES", direction: IN)
+  constants: [Experiment] @relationship(type: "USES", direction: IN)
+}

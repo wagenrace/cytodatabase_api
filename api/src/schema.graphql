@@ -6,14 +6,20 @@ type Experiment {
   id: ID!
   name: String!
   description: String
-  variables: [Component] @relationship(type: "USES", direction: OUT)
-  constants: [Component] @relationship(type: "USES", direction: OUT)
+  components: [Component] @relationship(type: "USES", direction: OUT)
+  measurements: [Measurement] @relationship(type: "USES", direction: OUT)
 }
 
 type Component {
   id: ID!
   name: String!
   description: String
-  variables: [Experiment] @relationship(type: "USES", direction: IN)
-  constants: [Experiment] @relationship(type: "USES", direction: IN)
+  experiments: [Experiment] @relationship(type: "USES", direction: IN)
+}
+
+type Measurement {
+  id: ID!
+  name: String!
+  description: String
+  experiments: [Experiment] @relationship(type: "USES", direction: IN)
 }
